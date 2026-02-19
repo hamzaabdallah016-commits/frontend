@@ -116,16 +116,21 @@ const useCategories = () => {
     });
     setError("");
   };
+  // 🔹 get a Category name by id
+  const getCategoryNameById = (id) => {
+    const category = categories?.find((c) => c._id === id);
+    return category ? category.name : "-";
+  };
 
-    // 🔹 Handle form input change
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
+  // 🔹 Handle form input change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
 
-      setCategoryData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    };
+    setCategoryData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return {
     categories,
@@ -143,6 +148,7 @@ const useCategories = () => {
     openUpdateModal,
     closeUpdateModal,
     handleInputChange,
+    getCategoryNameById,
   };
 };
 

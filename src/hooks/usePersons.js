@@ -6,16 +6,16 @@ const usePersons = () => {
   // State to store all persons
   const [persons, setPersons] = useState();
   // State for form data
-  const [personData, setPersonData] = useState(
-    { name: "",
-      email: "",
-      age: "",
-      phone: "",
-      deliveryAddress: "",
-      image: "",
-      role: "CUSTOMER",
-      favoriteFoods: []
-   });
+  const [personData, setPersonData] = useState({
+    name: "",
+    email: "",
+    age: "",
+    phone: "",
+    deliveryAddress: "",
+    image: "",
+    role: "CUSTOMER",
+    favoriteFoods: [],
+  });
 
   // State to handle errors
   const [error, setError] = useState("");
@@ -78,57 +78,8 @@ const usePersons = () => {
 
   // 🔹 Open create modal
   const openCreateModal = () => {
-    setPersonData(
-      { name: "",
-        email: "",
-        password: "",
-        age: "",
-        phone: "",
-        deliveryAddress: "",
-        image: "",
-        role: "CUSTOMER",
-        favoriteFoods: []
-      });
-    setShowCreateModal(true);
-    setError("");
-  };
-
-  const closeCreateModal = () => {
-    setShowCreateModal(false);
     setPersonData({
-       name: "",
-      email: "",
-      age: "",
-      phone: "",
-      deliveryAddress: "",
-      image: "",
-      role: "CUSTOMER",
-      favoriteFoods: [] });
-    setError("");
-  };
-
-  // 🔹 Open update modal
-  const openUpdateModal = (person) => {
-    setSelectedPerson(person);
-    setPersonData(
-      { name: person.name,
-        email: person.email,
-        age: person.age,
-        phone: person.phone,
-        deliveryAddress: person.deliveryAddress,
-        image: person.image,
-        role: person.role,
-        favoriteFoods: person.favoriteFoods
-      });
-    setShowUpdateModal(true);
-    setError("");
-  };
-
-  const closeUpdateModal = () => {
-    setSelectedPerson(null);
-    setShowUpdateModal(false);
-     setPersonData({
-       name: "",
+      name: "",
       email: "",
       password: "",
       age: "",
@@ -136,26 +87,75 @@ const usePersons = () => {
       deliveryAddress: "",
       image: "",
       role: "CUSTOMER",
-      favoriteFoods: [] });
+      favoriteFoods: [],
+    });
+    setShowCreateModal(true);
+    setError("");
+  };
+
+  const closeCreateModal = () => {
+    setShowCreateModal(false);
+    setPersonData({
+      name: "",
+      email: "",
+      age: "",
+      phone: "",
+      deliveryAddress: "",
+      image: "",
+      role: "CUSTOMER",
+      favoriteFoods: [],
+    });
+    setError("");
+  };
+
+  // 🔹 Open update modal
+  const openUpdateModal = (person) => {
+    setSelectedPerson(person);
+    setPersonData({
+      name: person.name,
+      email: person.email,
+      age: person.age,
+      phone: person.phone,
+      deliveryAddress: person.deliveryAddress,
+      image: person.image,
+      role: person.role,
+      favoriteFoods: person.favoriteFoods,
+    });
+    setShowUpdateModal(true);
+    setError("");
+  };
+
+  const closeUpdateModal = () => {
+    setSelectedPerson(null);
+    setShowUpdateModal(false);
+    setPersonData({
+      name: "",
+      email: "",
+      password: "",
+      age: "",
+      phone: "",
+      deliveryAddress: "",
+      image: "",
+      role: "CUSTOMER",
+      favoriteFoods: [],
+    });
     setError("");
   };
 
   // 🔹 Handle form input change
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
 
-  setPersonData((prev) => ({
-    ...prev,
-    [name]:
-      name === "age"
-        ? Number(value)
-        : name === "favoriteFoods"
-        ? value.split(",").map(f => f.trim())
-        : value,
-  }));
-};
-
-
+    setPersonData((prev) => ({
+      ...prev,
+      [name]:
+        name === "age"
+          ? Number(value)
+          : name === "favoriteFoods"
+          ? value.split(",").map((f) => f.trim())
+          : value,
+    }));
+  };
 
   return {
     persons,
